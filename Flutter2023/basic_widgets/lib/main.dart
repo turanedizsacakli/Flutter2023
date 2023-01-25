@@ -7,8 +7,15 @@ void main() {
   );
 }
 
-class MyApp extends StatelessWidget {
-  List<Student> students= [Student("Turan Ediz", "Saçaklı", 100),Student("Turan", "Ediz", 50),Student("Namık", "kimdir", 30)];
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  List<Student> students= [Student(1,"Turan Ediz", "Saçaklı", 100),Student(2,"Turan", "Ediz", 50),Student(3,"Namık", "kimdir", 30)];
+
+  var choosedSudent="";
 
   //var students = ["Ali", "Veli", "Hasan", "Hüseyin"];
   @override
@@ -52,23 +59,80 @@ class MyApp extends StatelessWidget {
                       backgroundImage: NetworkImage("https://blob.sololearn.com/avatars/34c5ebf5-bae7-413b-8f51-9d451c92562a.jpg"),
                     ),
                     title: Text(students[index].firstName + " " + students[index].lastName),
-                    subtitle: Text("sınavdan aldığı not : " + students[index].grade.toString()),
+                    subtitle: Text("sınavdan aldığı not : " + students[index].grade.toString()+" ["+students[index].getStatus +"] "),
                     trailing: buildStatusIcon(students[index].grade),
                     onTap: (){
+                      setState(() {
+                        choosedSudent=students[index].firstName + " " + students[index].lastName;
+                      });
                       print(students[index].firstName + " " + students[index].lastName);
+
                     },
                   );
                 })),
-        Center(
-          child: ElevatedButton(
-            onPressed: () {
-              var Message = pointResult(20);
-              messageAlert(context, Message);
-            },
-            child: Text(" Show Result ", style: TextStyle( fontSize: 25, color: Colors.white, fontWeight: FontWeight.w400),
+        Text("choosed student : "+choosedSudent),
+        Row(
+          children: [
+            Flexible(
+              fit: FlexFit.tight,
+              flex: 2,
+                child: ElevatedButton(
+                    onPressed: () {
+                      var Message = pointResult(20);
+                      messageAlert(context, Message);
+                    },
+                    child: Row(
+                      children: [
+                        Icon(Icons.add),
+                        SizedBox(width: 5.0),
+                        Text(" ADD ", style: TextStyle( fontSize: 12, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
             ),
-          ),
-        ),
+            SizedBox(width: 2.0),
+            Flexible(
+              fit: FlexFit.tight,
+              flex: 3,
+              child: ElevatedButton(
+                onPressed: () {
+                  var Message = pointResult(20);
+                  messageAlert(context, Message);
+                },
+                child: Row(
+                  children: [
+                    Icon(Icons.update),
+                    SizedBox(width: 5.0),
+                    Text(" UPDATE ", style: TextStyle( fontSize: 12, color: Colors.white,backgroundColor: Colors.yellow),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(width: 2.0),
+            Flexible(
+              fit: FlexFit.tight,
+              flex: 2,
+              child: ElevatedButton(
+                onPressed: () {
+                  var Message = pointResult(20);
+                  messageAlert(context, Message);
+                },
+                child: Row(
+                  children: [
+                    Icon(Icons.delete),
+                    SizedBox(width: 5.0),
+                    Text(" DELETE ", style: TextStyle( fontSize: 12, color: Colors.white,backgroundColor: Colors.red),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        )
+
+
       ],
     );
   }
