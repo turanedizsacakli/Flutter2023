@@ -6,12 +6,13 @@ class Student{
   String _status="";
 
 
-  Student(this.id,this.firstName,this.lastName,this.grade){
+  Student.withId(this.id,this.firstName,this.lastName,this.grade){
     firstName=firstName;
     lastName=lastName;
     grade=grade;
     id=id;
   }
+  //Student(this.firstName,this.lastName,this.grade){firstName=firstName;lastName=lastName;grade=grade;}
 
   String get getStatus{
     String Message = "";

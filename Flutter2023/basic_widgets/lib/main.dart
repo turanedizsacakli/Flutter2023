@@ -13,21 +13,24 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  List<Student> students= [Student(1,"Turan Ediz", "Saçaklı", 100),Student(2,"Turan", "Ediz", 50),Student(3,"Namık", "kimdir", 30)];
+  List<Student> students= [Student.withId(1,"Turan Ediz", "Saçaklı", 100),
+                           Student.withId(2,"Turan", "Ediz", 50),
+                           Student.withId(3,"Namık", "kemal", 30)];
 
-  var choosedSudent="";
-
+  Student selectedStudent= Student.withId(0,"","",0);
   //var students = ["Ali", "Veli", "Hasan", "Hüseyin"];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title:Text("student tracking system..."),
+          title:Text("Student Tracking System..."),
         ),
         body: buildBody(context),
         );
   }
 
+  //POINT STUDENT POINT WE WONT USE...!!!
   String pointResult(int point) {
     String Message = "";
     if (point >= 65) {
@@ -38,13 +41,17 @@ class _MyAppState extends State<MyApp> {
     return Message;
   }
 
+  // M E S S A G E B O X ! ! !
+
   void messageAlert(BuildContext context, String Message) {
     var alert = AlertDialog(
-      title: Text("hello dear..."),
+      title: Text(" D İ K K A T ! ! ! "),
       content: Text(Message),
     );
     showDialog(context: context, builder: (BuildContext context) => alert);
   }
+
+  // APP BODY SIDE....
 
   Widget buildBody(BuildContext context) {
     return Column(
@@ -63,14 +70,17 @@ class _MyAppState extends State<MyApp> {
                     trailing: buildStatusIcon(students[index].grade),
                     onTap: (){
                       setState(() {
-                        choosedSudent=students[index].firstName + " " + students[index].lastName;
+                        selectedStudent=students[index];
                       });
-                      print(students[index].firstName + " " + students[index].lastName);
+                      print(selectedStudent.firstName);
 
                     },
                   );
                 })),
-        Text("choosed student : "+choosedSudent),
+        Text("choosed student : "+selectedStudent.firstName),
+
+        // B U T T O N S ! ! !
+
         Row(
           children: [
             Flexible(
@@ -116,8 +126,11 @@ class _MyAppState extends State<MyApp> {
               flex: 2,
               child: ElevatedButton(
                 onPressed: () {
-                  var Message = pointResult(20);
-                  messageAlert(context, Message);
+                    setState(() {
+                        students.remove(selectedStudent);
+                        var Message = selectedStudent.firstName + " deleted...!!!";
+                        messageAlert(context, Message);
+                    });
                 },
                 child: Row(
                   children: [
@@ -131,14 +144,13 @@ class _MyAppState extends State<MyApp> {
             )
           ],
         )
-
-
       ],
     );
   }
 
-  Widget buildStatusIcon(int grade) {
+  // ICONS WHICH ARE RIGHT...
 
+  Widget buildStatusIcon(int grade) {
     if (grade >= 65) {
       return Icon(Icons.done);
     } else {
