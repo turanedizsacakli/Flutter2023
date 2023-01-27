@@ -1,3 +1,4 @@
+import 'package:basic_widgets/screens/student_add.dart';
 import 'package:flutter/material.dart';
 import 'package:basic_widgets/models/student.dart';
 
@@ -83,13 +84,15 @@ class _MyAppState extends State<MyApp> {
 
         Row(
           children: [
+
+            // A D D BUTTON...
+
             Flexible(
               fit: FlexFit.tight,
               flex: 2,
                 child: ElevatedButton(
                     onPressed: () {
-                      var Message = pointResult(20);
-                      messageAlert(context, Message);
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> StudentAdd()));
                     },
                     child: Row(
                       children: [
@@ -102,6 +105,9 @@ class _MyAppState extends State<MyApp> {
                   ),
             ),
             SizedBox(width: 2.0),
+
+            // U P D A T E BUTTON...
+
             Flexible(
               fit: FlexFit.tight,
               flex: 3,
@@ -121,6 +127,9 @@ class _MyAppState extends State<MyApp> {
               ),
             ),
             SizedBox(width: 2.0),
+
+            // D E L E T E BUTTON...
+
             Flexible(
               fit: FlexFit.tight,
               flex: 2,
