@@ -1,24 +1,24 @@
+import 'package:flutter/foundation.dart';
+
 class Student{
+ // @required
   int? id;
-  String? firstName;
-  String? lastName;
-  int? grade;
+
+  String firstName="";
+  String lastName="";
+  int grade=0;
   String _status="";
   /*final name;*/
 
-  //Student(){}
+  Student(){print("object");}
   Student.withId(this.id,this.firstName,this.lastName,this.grade){
     /*firstName=firstName;
     lastName=lastName;
     grade=grade;
     id=id;*/
   }
-  Student(this.firstName,this.lastName,this.grade){
-    firstName=firstName;
-    lastName=lastName;
-    grade=grade;
-  }
-  Student.withNoInfo(){  }
+  //  Student(this.firstName,this.lastName,this.grade){firstName=firstName;    lastName=lastName;    grade=grade;  }
+  //  Student.withNoInfo(){  }
 
   String get getStatus{
     String Message = "";
