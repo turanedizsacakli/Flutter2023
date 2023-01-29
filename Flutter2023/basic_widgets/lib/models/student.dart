@@ -4,13 +4,13 @@ class Student{
  // @required
   int? id;
 
-  String firstName="";
-  String lastName="";
-  int grade=0;
+  String? firstName;
+  String? lastName;
+  int? grade;
   String _status="";
   /*final name;*/
 
-  Student(){print("object");}
+  Student();
   Student.withId(this.id,this.firstName,this.lastName,this.grade){
     /*firstName=firstName;
     lastName=lastName;

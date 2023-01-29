@@ -2,7 +2,7 @@ class StudentValidationMixin{
 
   String validateFirstName(value){
     var message;
-    if(value.length<2){
+    if(value.length<2 || value==null ){
       message= "You have to write the real name which is longer than 2...";
     }
     return message;
@@ -10,7 +10,7 @@ class StudentValidationMixin{
 
   String validateLastName(value){
     var message;
-    if(value.length<2){
+    if(value.length<2 || value==null ){
       message= "You have to write the real lastname which is longer than 2...";
     }
     return message;
@@ -19,7 +19,7 @@ class StudentValidationMixin{
   String validateGrade(value){
     var grade=int.parse(value);
     var message;
-    if(grade<0 || grade>100){
+    if(grade<0 || grade>100 || value==null ){
       message= "Grade has to be between 0 and 100...";
     }
     return message;

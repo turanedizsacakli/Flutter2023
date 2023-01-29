@@ -66,9 +66,9 @@ class _MyAppState extends State<MyApp> {
                     leading: CircleAvatar(
                       backgroundImage: NetworkImage("https://blob.sololearn.com/avatars/34c5ebf5-bae7-413b-8f51-9d451c92562a.jpg"),
                     ),
-                    title: Text(students[index].firstName + " " + students[index].lastName),
+                    title: Text(students[index].firstName! + " " + students[index].lastName!),
                     subtitle: Text("sınavdan aldığı not : " + students[index].grade.toString()+" ["+students[index].getStatus +"] "),
-                    trailing: buildStatusIcon(students[index].grade),
+                    trailing: buildStatusIcon(students[index].grade!),
                     onTap: (){
                       setState(() {
                         selectedStudent=students[index];
@@ -78,7 +78,7 @@ class _MyAppState extends State<MyApp> {
                     },
                   );
                 })),
-        Text("choosed student : "+selectedStudent.firstName),
+        Text("choosed student : "+selectedStudent.firstName!),
 
         // B U T T O N S ! ! !
 
@@ -137,7 +137,7 @@ class _MyAppState extends State<MyApp> {
                 onPressed: () {
                     setState(() {
                         students.remove(selectedStudent);
-                        var Message = selectedStudent.firstName + " deleted...!!!";
+                        var Message = selectedStudent.firstName! + " deleted...!!!";
                         messageAlert(context, Message);
                     });
                 },
