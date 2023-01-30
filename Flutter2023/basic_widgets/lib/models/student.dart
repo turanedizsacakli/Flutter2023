@@ -17,6 +17,7 @@ class Student{
     grade=grade;
     id=id;*/
   }
+  Student.withNoId(this.firstName,this.lastName,this.grade);
   //  Student(this.firstName,this.lastName,this.grade){firstName=firstName;    lastName=lastName;    grade=grade;  }
   //  Student.withNoInfo(){  }
 

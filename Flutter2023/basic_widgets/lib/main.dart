@@ -1,4 +1,5 @@
 import 'package:basic_widgets/screens/student_add.dart';
+import 'package:basic_widgets/screens/student_edit.dart';
 import 'package:flutter/material.dart';
 import 'package:basic_widgets/models/student.dart';
 
@@ -18,7 +19,7 @@ class _MyAppState extends State<MyApp> {
                            Student.withId(2,"Turan", "Ediz", 50),
                            Student.withId(3,"Namık", "kemal", 30)];
 
-  Student selectedStudent= Student.withId(0,"","",0);
+  Student selectedStudent= Student.withId(0, "", "", 0);
   //var students = ["Ali", "Veli", "Hasan", "Hüseyin"];
 
   @override
@@ -92,7 +93,7 @@ class _MyAppState extends State<MyApp> {
               flex: 2,
                 child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> StudentAdd()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> StudentAdd(students)));
                     },
                     child: Row(
                       children: [
@@ -113,8 +114,7 @@ class _MyAppState extends State<MyApp> {
               flex: 3,
               child: ElevatedButton(
                 onPressed: () {
-                  var Message = pointResult(20);
-                  messageAlert(context, Message);
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> StudentEdit(selectedStudent)));
                 },
                 child: Row(
                   children: [
@@ -168,8 +168,3 @@ class _MyAppState extends State<MyApp> {
 
   }
 }
-
-//body: Column(
-//children: <Widget>[
-//Expanded(child: ListView(children: <Widget>[Text("Turan Ediz Saçaklı"),Text("Bilinmeyen Saçaklı"),],),),
-

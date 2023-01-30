@@ -3,22 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:basic_widgets/validation/student_validator.dart';
 
 
-class StudentAdd extends StatefulWidget {
-  List<Student> students;
-  StudentAdd(List<Student> this.students);
+class StudentEdit extends StatefulWidget {
+  Student selectedStudent;
+  StudentEdit(Student this.selectedStudent);
 
   @override
   State<StatefulWidget> createState() {
-    return _StudentAddState(students);
+    return _StudentEditState(selectedStudent);
   }
 }
 
-class _StudentAddState extends State with StudentValidationMixin {
-  List<Student> students;
-  var student = Student();
+class _StudentEditState extends State with StudentValidationMixin {
+  Student selectedStudent;
+  //var student = Student();
   var formKey = GlobalKey<FormState>();
 
-  _StudentAddState(List<Student> this.students);
+  _StudentEditState(Student this.selectedStudent);
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +52,7 @@ class _StudentAddState extends State with StudentValidationMixin {
 
   Widget buildFirstNameField() {
     return TextFormField(
+      initialValue: selectedStudent.firstName,
       decoration: InputDecoration(
           labelText: "Student Name", hintText: "Please Write the Name..."),
       //i couldnt start that...
@@ -60,27 +61,29 @@ class _StudentAddState extends State with StudentValidationMixin {
       },
       //validateFirstName,
       onSaved: (value) {
-        student.firstName = value!;
+        selectedStudent.firstName = value!;
       },
     );
   }
 
   Widget buildLastNameField() {
     return TextFormField(
+      initialValue: selectedStudent.lastName,
       decoration: InputDecoration(labelText: "Student LastName", hintText: "Please Write the LastName..."),
       //i couldnt start that...
-        validator: (value) {
+      validator: (value) {
         if(value==null||value.isEmpty){return "enter sth";}else{return null;}
-        },
+      },
       //validator: validateLastName,
       onSaved: (value) {
-        student.lastName = value!;
+        selectedStudent.lastName = value!;
       },
     );
   }
 
   Widget buildGradeNameField() {
     return TextFormField(
+      initialValue: selectedStudent.grade.toString(),
       decoration: InputDecoration(
           labelText: "Student Point", hintText: "Please Write the Point..."),
       //i couldnt start that...
@@ -89,36 +92,35 @@ class _StudentAddState extends State with StudentValidationMixin {
       },
       //validator: validateGrade,
       onSaved: (value) {
-        student.grade = int.parse(value!);
+        selectedStudent.grade = int.parse(value!);
       },
     );
   }
 
   Widget buildSubmitButton() {
     return ElevatedButton(
-        onPressed: () {
-          if (formKey.currentState!.validate()) {
-            formKey.currentState!.save();
-            students.add(student);
-            saveStudent();
-            Navigator.pop(context);
-          }
+      onPressed: () {
+        if (formKey.currentState!.validate()) {
+          formKey.currentState!.save();
+          saveStudent();
+          Navigator.pop(context);
+        }
       },
       child: Row(
         children: [
           Icon(Icons.delete),
           SizedBox(width: 5.0),
           Text(" SUBMIT ", style: TextStyle(fontSize: 12,
-              color: Colors.white,
-              ),),
+            color: Colors.white,
+          ),),
         ],
       ),
     );
   }
 
   void saveStudent() {
-    print(student.firstName);
-    print(student.lastName);
-    print(student.grade);
+    print(selectedStudent.firstName);
+    print(selectedStudent.lastName);
+    print(selectedStudent.grade);
   }
 }
